@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+  <title>reveal.js</title>
+
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/reveal.css" />
+  <link rel="stylesheet" href="css/theme/blood.css" />
+
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="lib/css/monokai-sublime.css" />
+
+  <!-- My custom css -->
+  <link rel="stylesheet" href="css/custom.css" />
+
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.type = "text/css";
+    link.href = window.location.search.match(/print-pdf/gi)
+      ? "css/print/pdf.css"
+      : "css/print/paper.css";
+    document.getElementsByTagName("head")[0].appendChild(link);
+  </script>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section data-markdown class="center">
+        <textarea data-template>
+              # Assembler x86 i x86-64
+              #### Łukasz Gut, Grzegorz Litarowicz
+            </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Agenda
+                ---
+                  - Co to jest Assembly i Assembler?
+                  - Rodzaje Assembly i Assemblerów
+                  - Hello, world!
+                  - Proces kompilacji 
+                  - Podstawy składni
+                  - Krótko o segmentach pamięci
+                  - Krótko o rejestrach
+                  - Tryby adresowania
+                  - Deklarowanie zmiennych oraz stałych
+                  - Arytmetyka
+                  - Operatory logiczne
+                  - Instrukcje warunkowe
+                  - Pętle
+                  - Tablice
+                  - Procedury
+                  - Analiza mikro optymalizacji robionych przez kompilator
+        </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Co to jest Assembly i Assembler
+                ---
+                **Assembly** - niskopoziomowy język programowania silnie skorelowany z architekturą procesora i instrukcjami rozumianymi przez ten procesor.
+                **Assembler** - program komputerowy przekształcający instrukcje napisane w niskopoziomowym języku assembly w kod maszynowy.
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Rodzaje Assembly i Assemblerów
+                ---
+                Istnieje wiele rodzajów assembly, między innymi:
+                - x86 assembly
+                - x86-64 assembly
+                - ARM assembly
+                - i więcej  ...
+
+                Istnieje także wiele rodzajów assemblerów, między innymi:
+                - NASM
+                - GNU Assembler
+                - MASM
+                - i więcej ...
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Hello, world!
+                ---
+                ```x86asm
+                section	.text
+                global _start     
+              
+                _start:	          
+                   mov	edx,len   
+                   mov	ecx,msg   
+                   mov	ebx,1     
+                   mov	eax,4     
+                   int	0x80      
+                
+                   mov	eax,1     
+                   int	0x80      
+
+                section	.data
+                msg db 'Hello, world!', 0xa 
+                len equ $ - msg    
+                ```
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Proces kompilacji
+                ---
+                Aby skompilować i zlinkować assembly w wykorzystaniem assemblera NASM i linkera GNU wpisujemy następujące komendy:
+                ```sh
+                nasm -f elf hello.asm #tworzenie pliku obiektowego
+                ld -m elf_i386 -s -o hello hello.o #linkowanie
+                ```
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Podstawy składni - sekcje
+                ---
+                Program w assembly dzieli się na 3 sekcje:
+                - **data**
+                - **bss**
+                - **text**
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Podstawy składni - sekcja data
+                ---
+                Sekcja **data** jest wykorzystywana do deklarowania zainicjalizowanych stałych. Dane w tej sekcji 
+                nie zmieniają się w trakcie działania programu.
+
+                Deklaracja sekcji data wygląda następująco:
+                ```x86asm
+                section.data
+                ```
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Podstawy składni - sekcja bss
+                ---
+                Sekcja **bss** jest wykorzystywana do deklarowania zmiennych.
+
+                Deklaracja sekcji bss wygląda następująco:
+                ```x86asm
+                section.bss
+                ```
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Podstawy składni - sekcja text
+                ---
+                Sekcja **text** jest wykorzystywana do trzymania kodu programu. Sekcja ta musi zaczynać się deklaracją *global _start*, która
+                mówi kernelowi gdzie rozpocząć wykonywanie programu.
+
+                Deklaracja sekcji text wygląda następująco:
+                ```x86asm
+                section.text
+                  global _start
+                _start:
+                ```
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Podstawy składni - polecenia
+                ---
+                Polecenia w języku assembly wprowadzamy po jednym na linię. Każde polecenie ma następujący format:
+                ```sh
+                [label]   mnemonic   [operands]   [;comment]
+                ```
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Podstawy składni - label
+                ---
+                Labele (etykiety) - nadają nazwy adresom pamięci, aby można było się do nich odnosić w łatwy sposób.
+                
+                ```x86asm
+                section	.text
+                global _start     
+              
+                _start: ; label
+                   mov	edx,len       
+                   mov	ecx,msg   
+                   mov	ebx,1     
+                   mov	eax,4     
+                   int	0x80      
+                
+                   mov	eax,1     
+                   int	0x80      
+
+                section	.data
+                msg db 'Hello, world!', 0xa ; label
+                len equ $ - msg ; label
+                ```
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Podstawy składni - mnemonic oraz operand
+                ---
+                Mnemonic - nazwa przypisana do instrukcji wykonywanej przez procesor.
+                Operand - paramentry mnemonica.
+                
+                Przykładowe mnemonic'i:
+                ```x86asm
+                inc count ; Inkrementacja zmiennej pod adresem 'count'
+
+                mov total, 48 ; Kopiuje liczbę pod adres 'total'
+
+                add ah, bh ; Dodaje zawartość rejestru bh do ah i zapisuje w ah
+                ```
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### ABC
+                ---
+
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### ABC
+                ---
+
+              </textarea>
+      </section>
+
+      <section data-markdown class="center">
+        <textarea data-template>
+              # Thank you!
+            </textarea>
+      </section>
+    </div>
+  </div>
+
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      progress: true,
+      slideNumber: true,
+      center: false,
+      width: 960,
+      height: 700,
+      margin: 0.2,
+      minScale: 0.1,
+      maxScale: 2.5,
+      dependencies: [
+        { src: "plugin/markdown/marked.js" },
+        { src: "plugin/markdown/markdown.js" },
+        { src: "plugin/notes/notes.js", async: true },
+        // { src: "plugin/highlight/highlight.js", async: true },
+        {
+          src: "plugin/highlight/highlight.js",
+          async: true,
+          callback: function () {
+            hljs.initHighlightingOnLoad();
+          }
+        }
+      ]
+    });
+  </script>
+</body>
+
+</html>
