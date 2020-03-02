@@ -45,3 +45,7 @@ strong {
 .reveal pre code {
     max-height: 100vh;
 }
+
+sup {
+    color: #62635E;
+}

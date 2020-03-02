@@ -238,9 +238,56 @@
 
       <section data-markdown style="text-align: justify;">
         <textarea data-template>
-                ### ABC
+                ### Segmenty pamięci
                 ---
+                Segmenty pamięci - **model pamięciowy** dzielący pamięć systemową
+                na niezależne segmenty, do których możemy się dostać za 
+                pomocą wskaźników znajdujących się w specjalnych rejestrach.  
 
+                Segment vs Sekcja:  
+                "The SECTION directive (SEGMENT is an exactly equivalent **synonym**)..."  
+                <sup><sup><sup>NASM documentation</sup></sup></sup>
+
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Segmenty pamięci - dane
+                ---
+                Segment danych - reprezentowany przez sekcje .data oraz .bss.  
+
+                Sekcja .data - deklaruje statyczny region pamięci,
+                w którym znajdują się zmienne globalne. Sekcja ta fizycznie
+                występuje w pliku wykonywalnym - loader musi ją załadować
+                do pamięci ram za nas.
+
+                Sekcja .bss - deklaruje statyczny obszar pamięci,
+                w którym pamięć jest wypełniona zerami. Lądują tutaj
+                globalne zmienne niezainicjalizowane, lub zainicjalizowane
+                zerami. Sekcja ta nie występuje również w pliku wykonywalnym - 
+                loader wie, że przed wejściem do funkcji main należy zaalokować pamięć
+                na tę sekcję i wypełnić ją zerami.
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Segmenty pamięci - kod
+                ---
+                Segment kodu - reprezentowany przez sekcję .text.  
+
+                Sekcja .text - definiuje obszar w pamięci, w którym
+                przechowywane są instrukcje programu. Ten obszar również
+                jest statyczny.
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Segmenty pamięci - stos
+                ---
+                Segment stosu - zawiera tymczasowe wartości.
               </textarea>
       </section>
 
