@@ -293,9 +293,22 @@
 
       <section data-markdown style="text-align: justify;">
         <textarea data-template>
-                ### ABC
+                ### Wywołania systemowe
                 ---
+                Wywołania systemowe (syscalle) - podstawowy **interfejs**
+                pomiędzy aplikacją a jądrem systemu.
+              </textarea>
+      </section>
 
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Wywołania systemowe - jak to robić?
+                ---
+                Aby skorzystać z wywołania systemowego na Linuxie należy:
+                - Umieścić numer wywołania systemowego w rejestrze **EAX**
+                - Umieścić argumenty wywołania systemowego w rejestrach **EBX**, **ECS**, ...
+                - Wywołać przerwanie **int 0x80**
+                - Rezultat zazwyczaj jest zwracany do rejestru **EAX**
               </textarea>
       </section>
 

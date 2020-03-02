@@ -1,7 +1,7 @@
 section	.text
-global _main     
+global _start     
               
-_main:
+_start:
    mov	edx,len
    mov	ecx,msg
    mov	ebx,1
