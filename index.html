@@ -312,6 +312,61 @@
               </textarea>
       </section>
 
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Deklarowanie zmiennych - składnia
+                ---
+                Składnia deklarowania zmiennych wygląda następująco:
+                ```x86asm
+                [variable-name] define-directive initial-value [,initial-value]...
+                ```
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Deklarowanie zmiennych - dyrektywy
+                ---
+
+                | Dyrektywa     | Ilość zaalokowanej pamięci (w bajtach) |
+                | ------------- | ---:|
+                | DB            |  1  |
+                | DW            |  2  |
+                | DD            |  4  |
+                | DQ            |  8  |
+                | DT            |  10 |
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Deklarowanie zmiennych niezainicjalozowanych
+                ---
+
+                | Dyrektywa     | Ilość zarezerwowanej pamięci (w bajtach) |
+                | ------------- | ---:|
+                | RESB          |  1  |
+                | RESW          |  2  |
+                | RESD          |  4  |
+                | RESQ          |  8  |
+                | REST          |  10 |
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Wielokrotne inicjalizacje
+                ---
+                Istnieją sytuacje, w których chcemy zainicjalizować 
+                wiele bajtów tą samą wartością (np. tablice).
+                Można wykorzystać do tego dyrektywę **TIMES**.
+
+                ```x86asm
+                arr TIMES 9 DW 0
+                ```
+              </textarea>
+      </section>
+
       <section data-markdown class="center">
         <textarea data-template>
               # Thank you!
