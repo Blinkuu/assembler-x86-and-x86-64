@@ -367,6 +367,64 @@
               </textarea>
       </section>
 
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Definiowanie stałych
+                ---
+                Stałe w assembly możemy definiować na 3 sposoby,
+                wykorzystując trzy różne dyrektywy:
+                - EQU
+                - %assign
+                - %define
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Definiowanie stałych - dyrektywa EQU
+                ---
+                Dyrektywa EQU jest wykorzystywana do definiowania stałych.
+
+                Składnia:
+                ```x86asm
+                CONSTANT_NAME EQU expression
+                ```
+
+                Stałe te można potem wykorzystywać w kodzie:
+                ```x86asm
+                mov eax, CONSTANT_NAME
+                ```
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Definiowanie stałych - dyrektywa %assign
+                ---
+                Dyrektywa %assign jest również wykorzystywana do definiowania
+                *stałych*, jednak pozwala na **redefinicję**.
+
+                Składnia:
+                ```x86asm
+                %assign CONSTANT_NAME expression
+                ```
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Definiowanie stałych - dyrektywa %define
+                ---
+                Dyrektywa %define jest bardzo podobna do #define znanego
+                z języka C.
+
+                Składnia:
+                ```x86asm
+                %define CONSTANT_NAME expression
+                ```
+              </textarea>
+      </section>
+
       <section data-markdown class="center">
         <textarea data-template>
               # Thank you!

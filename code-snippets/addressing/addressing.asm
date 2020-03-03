@@ -10,7 +10,8 @@ _start:
 
    mov [buffer], eax
 
-   mov	edx, buffer_len
+   %define len buffer_len
+   mov	edx, len
    mov	ecx, buffer
    mov	ebx,1
    mov	eax,4 
@@ -20,7 +21,7 @@ _start:
    int	0x80
 
 section	.data
-buffer_len db 11 
+buffer_len equ 10
 counter dd 0
 
 section .bss
