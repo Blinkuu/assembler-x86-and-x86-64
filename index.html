@@ -293,6 +293,76 @@
 
       <section data-markdown style="text-align: justify;">
         <textarea data-template>
+                ### Rejestry
+                ---
+                Rejestr – układ służący do przechowywania i odtwarzania informacji w postaci bitów. Na każdej pozycji rejestru przechowywany jest jeden bit informacji.
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Rejestry - ogólnego przeznaczenia
+                ---
+                Mamy 16 rejestrów ogólnego przeznaczenia. Możemy się odwoływać do wszystkich 64-bitów danego rejestru lub do ich części.
+                Przechowują one następujące informacje:
+                - argumenty dla operacji logicznych i arytmetycznych,
+                - argumenty dla operacji dokonywanych na adresach,
+                - wskaźniki na miejsca w pamięci.
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Rejestry - ogólnego przeznaczenia
+                ---
+                - **RSP** - Rejestr w którym przechowywany jest aktualny wskaźnik na ostati element dodany do stosu.
+                - **RBP** - Rejestr w którym przechowywany jest wskaźnik, wykożystywany przy wywoływaniu funkcji.
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Rejestry - RIP
+                ---
+                **RIP** - Rejestr w którym przechowywany jest wskaźnik na następną instrukcję do wykonania.
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Rejestry - segmentowe
+                ---
+                Rejestry procesora stworzone aby przechowywać adresy początkowe segmentów pamięci.
+                Rejestry:
+                 - **CS** - segment kodu,
+                 - **DS** - segment danych,
+                 - **SS** - segment stosu,
+                 - **ES**, **FS**, **GS** - dodatkowe segmenty danych.
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Rejestr - Flag
+                ---
+                Rejestry który jest używany, aby pokazać status oraz informacje kontrolne. Jest on 
+                aktualizowany przez procesor po wykonaniu każdej instrukcji. Przykładowe flagi:
+                - **ZF** - przetrzymuje informację czy wynikiem ostatniej operacji było 0,
+                - **CF** - służy do wskazania czy poprzednia operacja zakończyła się przeniesieniem.
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Rejestr - XMM
+                ---
+                Rejestry o rozmiarze 128-bitów, przeznaczone do 64-bitowych oraz 32-bitowych operacji zmiennoprzecinkowych.
+                Wspierają one również SIMD (Single Instruction Multiple Data). Nazwy rejestrów to xmm0 - xmm15.
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
                 ### Wywołania systemowe
                 ---
                 Wywołania systemowe (syscalle) - podstawowy **interfejs**
