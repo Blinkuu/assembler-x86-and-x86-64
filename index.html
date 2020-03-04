@@ -710,11 +710,11 @@
 
           Przykład:
           ```x86asm
-          mov ecx, 0x5
+            mov ecx, 0x5
           loop1:
-          [body]
-          dec ecx
-          jnz l1
+            [body]
+            dec ecx
+            jnz l1
           ```
         </textarea>
       </section>
@@ -733,11 +733,34 @@
 
           Przykład:
           ```x86asm
-          mov ecx, 0x5
+            mov ecx, 0x5
           loop1:
-          [body]
-          loop l1
+            [body]
+            loop l1
           ```            
+        </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+          ### Procedury
+          ---
+          Język assembly pozwala także na definiowanie procedur. Procedury składają się z **nazwy**, **ciała**
+          i wyrażenia **ret**. 
+
+          Składnia:
+          ```x86asm
+          procedure_name:
+            [body]
+            ret
+          ```
+
+          Do wywołania procedury używa się instrukcji **call**.
+
+          Składnia:
+          ```x86asm
+          call procedure_name
+          ```
         </textarea>
       </section>
 
