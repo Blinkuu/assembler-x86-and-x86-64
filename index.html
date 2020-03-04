@@ -743,6 +743,23 @@
 
       <section data-markdown style="text-align: justify;">
         <textarea data-template>
+          ### Tablice
+          ---
+          ```x86asm
+          numbers	dw  34,  45,  56,  67,  75, 89
+          ```
+          Deklaracja tablicy składającej się z 6 elementów po 2 bajty. "numbers" - będzie adresem pierwszego elementu,
+          adresem kolejnego będzie numbers + 2.
+          ```x86asm
+          tab dw  0, 0, 0, 0, 0, 0, 0, 0
+          ...
+          tab times 8 dw 0
+          ```
+        </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
           ### Procedury
           ---
           Język assembly pozwala także na definiowanie procedur. Procedury składają się z **nazwy**, **ciała**
