@@ -384,6 +384,60 @@
 
       <section data-markdown style="text-align: justify;">
         <textarea data-template>
+                ### Tryby adresowania
+                ---
+                Podstawowe tryby adresowania:
+                - adresowanie rejestrowe,
+                - adresowanie natychmiastowe,
+                - adresowania bezpośrednie.
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Tryby adresowania - adresowanie rejestrowe
+                ---
+                Adresowanie rejestrowe - to tryb adresowania, gdy rejestr jest pierwszym, drugim lub obydwoma parametrami mnemonica. </br>
+                Przykłady:
+                ```x86asm
+                mov rdx, var
+                mov count, rcx	    
+                mov rax, rbx	      
+                ```
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Tryby adresowania - adresowanie natychmiastowe
+                ---
+                Adresowanie natychmiastowe - następuje gdy, drugim parametrem jest stała wartość lub stałe wyrażenie. </br>
+                Przykłady:
+                ```x86asm
+                byte_val  DB  150
+                word_val  DW  300
+                add       byte_val, 65
+                mov       ax, 45H
+                ```
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Tryby adresowania - adresowanie bezpośrednie
+                ---
+                Adresowanie bezpośrednie - występuje gdy wymagany jest dostęp do pamięci np do segmentu .data.
+                Tryb ten jest znacznie wolniejszy od poprzednich. </br>
+                Przykłady:
+                ```x86asm
+                add	byte_val, dl
+                mov	bx, word_val
+                ```
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
                 ### Deklarowanie zmiennych - składnia
                 ---
                 Składnia deklarowania zmiennych wygląda następująco:
@@ -491,6 +545,68 @@
                 Składnia:
                 ```x86asm
                 %define CONSTANT_NAME expression
+                ```
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Arytmetyka - instrukcja inc
+                ---
+                INC - instrukcja używana do inkrementacji przekazanego parametru.
+                Składnia:
+                ```x86asm
+                inc argument
+                ```
+
+                Przykład:
+                ```x86asm
+                inc rbx
+                inc bx
+                inc [val]
+                ```
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Arytmetyka - instrukcje add oraz sub
+                ---
+                add/sub - instrukcja używana do dodawania i odejmowania. </br>
+                Składnia:
+                ```x86asm
+                add/sub dest, src
+                ```
+
+                Przykład:
+                ```x86asm
+                add rbx, rax
+                sub val, rbx
+                add rcx, 5
+                ```
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Arytmetyka - instrukcje MUL oraz IMUL
+                ---
+                IMUL - instrukcja używana do mnożenia liczb biorąc pod uwagę znak. </br>
+                MUL - instrukcja używana do mnożenia liczb bez znaku. </br>
+                Składnia:
+                ```x86asm
+                mul/imul multiplier
+                ```
+
+                Przykład:
+                ```x86asm
+                mov al, 10
+                mov dl, 25
+                mul dl ; ax = al * dl
+                ...
+                mov dl, 0FFH	; DL= -1
+                mov al, 0BEH	; AL = -66
+                imul dl
                 ```
               </textarea>
       </section>
