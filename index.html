@@ -600,13 +600,31 @@
 
                 Przykład:
                 ```x86asm
-                mov al, 10
-                mov dl, 25
-                mul dl ; ax = al * dl
-                ...
-                mov dl, 0FFH	; DL= -1
-                mov al, 0BEH	; AL = -66
-                imul dl
+                mul dl; ax = al * dl(byte)
+                mul dx; dx:ax = ax * dx(word)
+                mul edx; edx:eax = eax * edx(double)
+                mul rdx; rdx:rax = rax * rdx(quad)
+                ```
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Arytmetyka - instrukcje div oraz idiv
+                ---
+                IDIV - instrukcja używana do dzielenia liczb ze znakiem. </br>
+                DIV - instrukcja używana do dzielenia liczb bez znaku. </br>
+                Składnia:
+                ```x86asm
+                div/idiv multiplier
+                ```
+
+                Przykład:
+                ```x86asm
+                div dl; ax = al * dl(byte)
+                div dx; dx:ax = ax * dx(word)
+                div edx; edx:eax = eax * edx(double)
+                div rdx; rdx:rax = rax * rdx(quad)
                 ```
               </textarea>
       </section>
@@ -632,42 +650,95 @@
 
       <section data-markdown style="text-align: justify;">
         <textarea data-template>
-                ### Pętle
+                ### Instrukcje warunkowe - cmp
                 ---
-                Aby zaimplementować pętle w języku assembly trzeba wykorzystać
-                "skoki" warunkowe, bądź zwykłe.
+                cmp - porównuje dwa parametry, nie edytując ich. </br>
+                Składnia:
+                ```x86asm
+                cmp arg1, arg2
+                ```
+
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Instrukcje warunkowe - J...
+                ---
+                J... - to polecenie wykonuje skok warunkowy na podstawie wyniku ostatniej instrukcji. </br>
+                Składnia:
+                ```x86asm
+                j... label
+                ```
 
                 Przykład:
                 ```x86asm
-                mov ecx, 0x5
-                loop1:
-                [body]
-                dec ecx
-                jnz l1
+                cmp rax, rbx
+                jz/je label ; wykonaj skok jeśli równe
+                ...
+                cmp rax, 10
+                jnz/jne label ; wykonaj skok jeśli nie równe
                 ```
               </textarea>
       </section>
 
       <section data-markdown style="text-align: justify;">
         <textarea data-template>
-                ### Pętle - uproszczenie
+                ### Skok bezwarunkowy - JMP
                 ---
-                Język assembly dostarcza nam specjalną instrukcję **loop**, która
-                ułatwia pracę z pętlami.  
-
-                Instrukcja ta *zakłada*, że w rejestrze ECX znajduje się
-                licznik. W momencie wykonania tej instrukcji wartość w rejestrze ecx
-                jest dekrementowana i wykonywany jest skok do podanej etykiety,
-                dopóki wartość w rejestrze ECX jest większa od zera.
+                jmp - to polecenie wykonuje bezwarunkowy skok do etykiety. </br>
+                Składnia:
+                ```x86asm
+                jmp label
+                ```
 
                 Przykład:
                 ```x86asm
-                mov ecx, 0x5
-                loop1:
-                [body]
-                loop l1
+                label:
+                  add rax, rbx
+                  jmp label ; wykonaj skok do etykiety label
                 ```
               </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+          ### Pętle
+          ---
+          Aby zaimplementować pętle w języku assembly trzeba wykorzystać
+          "skoki" warunkowe, bądź zwykłe.
+
+          Przykład:
+          ```x86asm
+          mov ecx, 0x5
+          loop1:
+          [body]
+          dec ecx
+          jnz l1
+          ```
+        </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+          ### Pętle - uproszczenie
+          ---
+          Język assembly dostarcza nam specjalną instrukcję **loop**, która
+          ułatwia pracę z pętlami.  
+
+          Instrukcja ta *zakłada*, że w rejestrze ECX znajduje się
+          licznik. W momencie wykonania tej instrukcji wartość w rejestrze ecx
+          jest dekrementowana i wykonywany jest skok do podanej etykiety,
+          dopóki wartość w rejestrze ECX jest większa od zera.
+
+          Przykład:
+          ```x86asm
+          mov ecx, 0x5
+          loop1:
+          [body]
+          loop l1
+          ```            
+        </textarea>
       </section>
 
       <section data-markdown class="center">
