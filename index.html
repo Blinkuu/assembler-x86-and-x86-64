@@ -648,6 +648,61 @@
               </textarea>
       </section>
 
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Instrukcje warunkowe - cmp
+                ---
+                cmp - porównuje dwa parametry, nie edytując ich. </br>
+                Składnia:
+                ```x86asm
+                cmp arg1, arg2
+                ```
+
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Instrukcje warunkowe - J...
+                ---
+                J... - to polecenie wykonuje skok warunkowy na podstawie wyniku ostatniej instrukcji. </br>
+                Składnia:
+                ```x86asm
+                j... label
+                ```
+
+                Przykład:
+                ```x86asm
+                cmp rax, rbx
+                jz/je label ; wykonaj skok jeśli równe
+                ...
+                cmp rax, 10
+                jnz/jne label ; wykonaj skok jeśli nie równe
+                ```
+
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Skok bezwarunkowy - JMP
+                ---
+                jmp - to polecenie wykonuje bezwarunkowy skok do etykiety. </br>
+                Składnia:
+                ```x86asm
+                jmp label
+                ```
+
+                Przykład:
+                ```x86asm
+                label:
+                  add rax, rbx
+                  jmp label ; wykonaj skok do etykiety label
+                ```
+
+              </textarea>
+      </section>
+
       <section data-markdown class="center">
         <textarea data-template>
               # Thank you!
