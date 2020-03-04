@@ -600,13 +600,31 @@
 
                 Przykład:
                 ```x86asm
-                mov al, 10
-                mov dl, 25
-                mul dl ; ax = al * dl
-                ...
-                mov dl, 0FFH	; DL= -1
-                mov al, 0BEH	; AL = -66
-                imul dl
+                mul dl; ax = al * dl(byte)
+                mul dx; dx:ax = ax * dx(word)
+                mul edx; edx:eax = eax * edx(double)
+                mul rdx; rdx:rax = rax * rdx(quad)
+                ```
+              </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+                ### Arytmetyka - instrukcje div oraz idiv
+                ---
+                IDIV - instrukcja używana do dzielenia liczb ze znakiem. </br>
+                DIV - instrukcja używana do dzielenia liczb bez znaku. </br>
+                Składnia:
+                ```x86asm
+                div/idiv multiplier
+                ```
+
+                Przykład:
+                ```x86asm
+                div dl; ax = al * dl(byte)
+                div dx; dx:ax = ax * dx(word)
+                div edx; edx:eax = eax * edx(double)
+                div rdx; rdx:rax = rax * rdx(quad)
                 ```
               </textarea>
       </section>
