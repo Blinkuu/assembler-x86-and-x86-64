@@ -679,7 +679,6 @@
                 cmp rax, 10
                 jnz/jne label ; wykonaj skok jeśli nie równe
                 ```
-
               </textarea>
       </section>
 
@@ -699,26 +698,62 @@
                   add rax, rbx
                   jmp label ; wykonaj skok do etykiety label
                 ```
-
               </textarea>
       </section>
 
       <section data-markdown style="text-align: justify;">
         <textarea data-template>
-                ### Tablice
-                ---
-                ```x86asm
-                numbers	dw  34,  45,  56,  67,  75, 89
-                ```
-                Deklaracja tablicy składającej się z 6 elementów po 2 bajty. "numbers" - będzie adresem pierwszego elementu,
-                adresem kolejnego będzie numbers + 2.
-                ```x86asm
-                tab dw  0, 0, 0, 0, 0, 0, 0, 0
-                ...
-                tab times 8 dw 0
-                ```
+          ### Pętle
+          ---
+          Aby zaimplementować pętle w języku assembly trzeba wykorzystać
+          "skoki" warunkowe, bądź zwykłe.
 
-              </textarea>
+          Przykład:
+          ```x86asm
+          mov ecx, 0x5
+          loop1:
+          [body]
+          dec ecx
+          jnz l1
+          ```
+        </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+        <textarea data-template>
+          ### Pętle - uproszczenie
+          ---
+          Język assembly dostarcza nam specjalną instrukcję **loop**, która
+          ułatwia pracę z pętlami.  
+
+          Instrukcja ta *zakłada*, że w rejestrze ECX znajduje się
+          licznik. W momencie wykonania tej instrukcji wartość w rejestrze ecx
+          jest dekrementowana i wykonywany jest skok do podanej etykiety,
+          dopóki wartość w rejestrze ECX jest większa od zera.
+
+          Przykład:
+          ```x86asm
+          mov ecx, 0x5
+          loop1:
+          [body]
+          loop l1
+          ```            
+        </textarea>
+      </section>
+
+      <section data-markdown style="text-align: justify;">
+          ### Tablice
+          ---
+          ```x86asm
+          numbers	dw  34,  45,  56,  67,  75, 89
+          ```
+          Deklaracja tablicy składającej się z 6 elementów po 2 bajty. "numbers" - będzie adresem pierwszego elementu,
+          adresem kolejnego będzie numbers + 2.
+          ```x86asm
+          tab dw  0, 0, 0, 0, 0, 0, 0, 0
+          ...
+          tab times 8 dw 0
+          ```
       </section>
 
       <section data-markdown class="center">
