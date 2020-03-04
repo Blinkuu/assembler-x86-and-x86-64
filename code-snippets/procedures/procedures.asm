@@ -17,6 +17,7 @@ print_buffer:
    mov ecx, [ebp + 12] ; buffer
    int 0x80
 
+   mov esp, ebp
    pop ebp
    ret
 
@@ -35,8 +36,7 @@ l1:
     push char
     push char_len
     call print_buffer
-    pop ecx
-    pop ecx
+    add esp, 8
 
     pop ecx
     loop l1
@@ -44,9 +44,9 @@ l1:
     push new_line
     push char_len
     call print_buffer
-    pop ecx
-    pop ecx
+    add esp, 8
 
+    mov esp, ebp
     pop ebp
     ret
 
@@ -64,6 +64,7 @@ _start:
    push dword [buffer1]
    push dword [buffer2]
    call print_range
+   add esp, 8
 
    mov eax, 1
    int 0x80
