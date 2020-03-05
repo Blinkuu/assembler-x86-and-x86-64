@@ -96,20 +96,21 @@
                 ```x86asm
                 section	.text
                 global _start     
-              
-                _start:	          
-                   mov	edx,len   
-                   mov	ecx,msg   
-                   mov	ebx,1     
-                   mov	eax,4     
-                   int	0x80      
+                              
+                _start:
+                   mov	rdx, len
+                   mov	rsi, msg
+                   mov	rdi, 1
+                   mov	rax, 1
+                   syscall   
+                                
+                   mov	rax, 60
+                   xor   rdi, rdi
+                   syscall
                 
-                   mov	eax,1     
-                   int	0x80      
-
                 section	.data
-                msg db 'Hello, world!', 0xa 
-                len equ $ - msg    
+                msg db 'Hello, world!', 0xa
+                len equ $ - msg
                 ```
               </textarea>
       </section>
@@ -120,8 +121,8 @@
                 ---
                 Aby skompilować i zlinkować assembly w wykorzystaniem assemblera NASM i linkera GNU wpisujemy następujące komendy:
                 ```sh
-                nasm -f elf hello.asm #tworzenie pliku obiektowego
-                ld -m elf_i386 -s -o hello hello.o #linkowanie
+                nasm -f elf64 hello-world.asm #tworzenie pliku obiektowego
+                ld hello-world.o #linkowanie
                 ```
               </textarea>
       </section>
@@ -200,20 +201,21 @@
                 ```x86asm
                 section	.text
                 global _start     
-              
-                _start: ; label
-                   mov	edx,len       
-                   mov	ecx,msg   
-                   mov	ebx,1     
-                   mov	eax,4     
-                   int	0x80      
+                              
+                _start:
+                   mov	rdx, len
+                   mov	rsi, msg
+                   mov	rdi, 1
+                   mov	rax, 1
+                   syscall   
+                                
+                   mov	rax, 60
+                   xor   rdi, rdi
+                   syscall
                 
-                   mov	eax,1     
-                   int	0x80      
-
                 section	.data
-                msg db 'Hello, world!', 0xa ; label
-                len equ $ - msg ; label
+                msg db 'Hello, world!', 0xa
+                len equ $ - msg
                 ```
               </textarea>
       </section>
@@ -375,10 +377,10 @@
                 ### Wywołania systemowe - jak to robić?
                 ---
                 Aby skorzystać z wywołania systemowego na Linuxie należy:
-                - Umieścić numer wywołania systemowego w rejestrze **EAX**
-                - Umieścić argumenty wywołania systemowego w rejestrach **EBX**, **ECS**, ...
-                - Wywołać przerwanie **int 80h**
-                - Rezultat zazwyczaj jest zwracany do rejestru **EAX**
+                - Umieścić numer wywołania systemowego w rejestrze **RAX**
+                - Umieścić argumenty wywołania systemowego w rejestrach **RDI**, **RSI**, ...
+                - Wywołać przerwanie **syscall**
+                - Rezultat zazwyczaj jest zwracany do rejestru **RAX**
               </textarea>
       </section>
 
@@ -416,6 +418,7 @@
                 ```x86asm
                 byte_val  DB  150
                 word_val  DW  300
+                ...
                 add       byte_val, 65
                 mov       ax, 45H
                 ```
@@ -710,10 +713,10 @@
 
           Przykład:
           ```x86asm
-            mov ecx, 0x5
+            mov rcx, 0x5
           loop1:
             [body]
-            dec ecx
+            dec rcx
             jnz l1
           ```
         </textarea>
@@ -733,7 +736,7 @@
 
           Przykład:
           ```x86asm
-            mov ecx, 0x5
+            mov rcx, 0x5
           loop1:
             [body]
             loop l1

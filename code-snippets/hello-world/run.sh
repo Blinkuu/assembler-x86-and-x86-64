@@ -1,2 +1,2 @@
-#!/bin/zsh
-nasm -f elf $1.asm && ld -m elf_i386 -s $1.o && ./a.out
+#!/bin/sh
+nasm -f elf64 hello-world.asm && ld hello-world.o && ./a.out
