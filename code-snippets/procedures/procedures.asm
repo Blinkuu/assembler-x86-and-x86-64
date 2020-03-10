@@ -1,73 +1,61 @@
 %define buffer_len 255
+%define SYS
+%define SYS_EXIT 60
+%define EXIT_SUCCESS 0
+%define SYSREAD 0
+%define SYSWRITE 1
+%define FD_STDIN 0
+%define FD_STDOUT 1
 
 read_input:
-   mov eax, 3 ; sys_read
-   mov ebx, 0 ; stdin fd
-   mov edx, buffer_len ; size
-   int 0x80
-   ret
+    push rbp
+    mov rbp, rsp
 
-print_buffer:
-   push ebp
-   mov ebp, esp
-
-   mov eax, 4 ; sys_write
-   mov ebx, 1 ; stdout
-   mov edx, [ebp + 8] ; size
-   mov ecx, [ebp + 12] ; buffer
-   int 0x80
-
-   mov esp, ebp
-   pop ebp
-   ret
-
-print_range:
-    push ebp
-    mov ebp, esp
+    mov rax, SYSREAD
+    mov rdi, FD_STDIN
+    mov rdx, buffer_len
+    syscall
     
-    mov eax, [ebp + 8]
-    mov ebx, [ebp + 12]
-    sub eax, ebx
-    mov ecx, eax
-
-l1:
-    push ecx
-    
-    push char
-    push char_len
-    call print_buffer
-    add esp, 8
-
-    pop ecx
-    loop l1
-
-    push new_line
-    push char_len
-    call print_buffer
-    add esp, 8
-
-    mov esp, ebp
-    pop ebp
+    pop rbp
     ret
 
-section	.text
-global _start     
-              
-_start:
+print_buffer:
+    push rbp
+    mov rbp, rsp
+    
+    mov rax, SYSWRITE
+    mov rdi, FD_STDOUT
+    mov rdx, [rbp + 24] ; size
+    mov rsi, [rbp + 16] ; buffer
+    syscall
 
-   mov ecx, buffer1
-   call read_input
-   
-   mov ecx, buffer2
-   call read_input
+    pop rbp
+    ret
 
-   push dword [buffer1]
-   push dword [buffer2]
-   call print_range
-   add esp, 8
+print_range:
+    push rbp
+    mov rbp, rsp
+    
+    mov rax, [rbp + 24] ; buffer2
+    mov rax, [rax]
+    mov rbx, [rbp + 16]
+    mov rbx, [rbx]
+    sub rax, rbx ; buffer1
+    mov rcx, rax
 
-   mov eax, 1
-   int 0x80
+l1:
+    push rcx
+ 
+    push char_len
+    push char
+    call print_buffer
+    add rsp, 16
+
+    pop rcx
+    loop l1
+
+    pop rbp
+    ret
 
 section .data
    char db 'A', 0x0
@@ -75,6 +63,26 @@ section .data
    char_len equ 0x1
 
 section	.bss
-   buffer1 resb buffer_len
-   buffer2 resb buffer_len
+    buffer1 resb buffer_len
+    buffer2 resb buffer_len
+
+section	.text
+global _start     
+              
+_start:
+
+    mov rsi, buffer1
+    call read_input
+   
+    mov rsi, buffer2
+    call read_input
+
+    push buffer2
+    push buffer1
+    call print_range
+    add rsp, 16 
+
+    mov rax, SYS_EXIT 
+    mov rdi, EXIT_SUCCESS
+    syscall
 
