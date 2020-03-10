@@ -13,30 +13,31 @@ section .text
    global _start
 	
 _start:
-   mov eax, 4 ; syswrite
-   mov ebx, 1 ; file_descriptor - stdout
-   mov ecx, welcome_msg ; message string
-   mov edx, welcome_msg_len ; message length
-   int 80h ; interrupt
+   mov rax, 1 ; syswrite
+   mov rdi, 1 ; file_descriptor - stdout
+   mov rsi, welcome_msg ; message string
+   mov rdx, welcome_msg_len ; message length
+   syscall
 
-   mov eax, 3 ; sysread
-   mov ebx, 0 ; file_descriptor - stdin
-   mov ecx, input_buffer ; buffer
-   mov edx, input_buffer_len ; buffer size
-   int 80h ; interrupt
+   mov rax, 0 ; sysread
+   mov rdi, 0 ; file_descriptor - stdin
+   mov rsi, input_buffer ; buffer
+   mov rdx, input_buffer_len ; buffer size
+   syscall
 	
-   mov eax, 4 ; syswrite
-   mov ebx, 1 ; file_descriptor - stdout
-   mov ecx, information_msg ; message string
-   mov edx, information_msg_len ; message length
-   int 80h ; interrupt 
+   mov rax, 1 ; syswrite
+   mov rdi, 1 ; file_descriptor - stdout
+   mov rsi, information_msg ; message string
+   mov rdx, information_msg_len ; message length
+   syscall
 
-   mov eax, 4
-   mov ebx, 1
-   mov ecx, input_buffer
-   mov edx, input_buffer_len
-   int 80h  
+   mov rax, 1
+   mov rdi, 1
+   mov rsi, input_buffer
+   mov rdx, input_buffer_len
+   syscall
     
-   mov eax, 1
-   mov ebx, 0
-   int 80h
+   mov rax, 60 
+   mov rdi, 0
+   syscall
+
