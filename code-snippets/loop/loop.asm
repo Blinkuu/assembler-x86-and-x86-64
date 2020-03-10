@@ -3,19 +3,21 @@ global _start
               
 _start:
 
-  mov ecx, 10
+   mov rcx, 10
 l1:
    push rcx
 
+   mov	rax, 1
+   mov	rdi, 1
    mov	rdx, len
    mov	rsi, msg
-   mov	rdi, 1
-   mov	rax, 1
    syscall
 
    pop rcx
+
    dec rcx
    jnz l1
+   ; loop l1
                 
    mov	eax, 60
    xor   rdi, rdi
