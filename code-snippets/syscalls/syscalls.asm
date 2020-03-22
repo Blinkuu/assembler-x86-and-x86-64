@@ -1,5 +1,5 @@
 section .data                           
-   welcome_msg db 'Please enter a number: '
+   welcome_msg db 'Please enter a message: '
    welcome_msg_len equ $-welcome_msg            
    information_msg db 'You have entered: '
    information_msg_len equ $-information_msg                 
