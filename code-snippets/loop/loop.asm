@@ -15,9 +15,9 @@ l1:
 
    pop rcx
 
-   dec rcx
-   jnz l1
-   ; loop l1
+   ; dec rcx
+   ; jnz l1
+   loop l1
                 
    mov	eax, 60
    xor   rdi, rdi

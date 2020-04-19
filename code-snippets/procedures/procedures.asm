@@ -1,5 +1,4 @@
 %define buffer_len 255
-%define SYS
 %define SYS_EXIT 60
 %define EXIT_SUCCESS 0
 %define SYSREAD 0
